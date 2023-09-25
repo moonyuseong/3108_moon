@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function addItem(){
+            var newItem = document.createElement("div");
+            newItem.innerHTML = document.getElementById("ToDo").value;
+            document.getElementById("list").appendChild(newItem);
+            newItem.onclick = deleteItem;
+            document.getElementById("list").appendChild(newItem);
+            saveList();
+        }
+        function deleteItem(){
+            document.getElementById("list").removeChild(this);
+            saveList();
+        }
+        function saveList(){
+            localStorage.storedList = document.getElementById("list").innerHTML;
+        }
+        function loadList(){
+            document.getElementById("list").innerHTML = localStorage.storedList;
+            for(var i=0;i<list.children.length;i++){
+                list.children[i].onclick=deleteItem;
+            }
+        }
+    </script>
+    <title>Document</title>
+</head>
+<body style="background-color: pink;">
+    <h3 style="text-align: center;">MY Page에 오신걸 환영합니다!</h3>
+    <p style="text-align: center;">방명록을 작성해주세요</p>
+    <div style="background-color: white; width: 500px; height: 700px; border-radius: 50px; margin-left: 700px;">
+        <input type="text" id="ToDo" style="margin-top: 50px; width: 350px; height: 200px; margin-left: 60px;"><br><br>
+        <input type="button" value="버튼" onclick="addItem()" style="margin-left: 220px;"><br>
+        <div id="list" style="margin-left: 230px;"></div>
+    </div>
+    <script>
+        if(localStorage.storedList){
+            loadList();
+        }
+    </script>
+    
+</body>
+</html>
